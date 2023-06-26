@@ -125,8 +125,8 @@ class _SettingsStorysDetailPageState extends State<SettingsStorysDetailPage> {
                         const Expanded(child: Text("Info")),
                         ElevatedButton(
                             onPressed: () {},
-                            child: Row(
-                              children: const [
+                            child: const Row(
+                              children: [
                                 Icon(Icons.add, size: 18),
                                 SizedBox(width: 6),
                                 Text("Add"),
@@ -178,5 +178,5 @@ extension SettingsTileRadio on SettingsTile {
 
 extension JoinRulesExtension on Room {
   String? get joinRulesString =>
-      getState(EventTypes.RoomJoinRules)?.content['join_rule'];
+      getState(EventTypes.RoomJoinRules)?.content.tryGet<String>('join_rule');
 }

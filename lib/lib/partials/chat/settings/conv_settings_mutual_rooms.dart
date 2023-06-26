@@ -18,7 +18,7 @@ class _ConvSettingsMutualRoomsState extends State<ConvSettingsMutualRooms> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Row(children: const [
+      const Row(children: [
         ConvSettingsBackButton(),
         Text("Mutual rooms",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
@@ -29,8 +29,8 @@ class _ConvSettingsMutualRoomsState extends State<ConvSettingsMutualRooms> {
                 .getMutualRoomsWithUser(widget.room.directChatMatrixID!),
             builder: (context, snap) {
               if (!snap.hasData) {
-                return Column(
-                  children: const [
+                return const Column(
+                  children: [
                     MatrixRoomsListTileShimmer(),
                     MatrixRoomsListTileShimmer()
                   ],
@@ -44,11 +44,13 @@ class _ConvSettingsMutualRoomsState extends State<ConvSettingsMutualRooms> {
                       final r = widget.room.client.getRoomById(roomId);
                       if (r == null) return Container();
                       return RoomListItem(
-                          key: Key("room_${r.id}"),
-                          room: r,
-                          selected: r == widget.room,
-                          client: r.client,
-                          onSelection: (_) {});
+                        key: Key("room_${r.id}"),
+                        room: r,
+                        open: r == widget.room,
+                        client: r.client,
+                        onSelection: (_) {},
+                        onLongPress: () {},
+                      );
                     }),
                 ],
               );

@@ -544,8 +544,10 @@ class MessageDisplayState extends State<MessageDisplay>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("End-To-End encryption activated"),
-                      Text(event.content["algorithm"],
-                          style: Theme.of(context).textTheme.caption),
+                      Text(
+                          event.content.tryGet<String>("algorithm") ??
+                              "An error happened - no algorithm given",
+                          style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
                 ),
@@ -593,8 +595,8 @@ class MessageDisplayState extends State<MessageDisplay>
               store: true),
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasError) {
-              return Row(
-                children: const [
+              return const Row(
+                children: [
                   Icon(Icons.error),
                   SizedBox(
                     width: 10,

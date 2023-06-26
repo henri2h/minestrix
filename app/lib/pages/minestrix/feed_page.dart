@@ -13,7 +13,6 @@ import 'package:minestrix_chat/config/matrix_types.dart';
 import 'package:minestrix_chat/partials/custom_list_view.dart';
 import 'package:minestrix_chat/partials/dialogs/adaptative_dialogs.dart';
 import 'package:minestrix_chat/partials/feed/posts/matrix_post_editor.dart';
-import 'package:minestrix_chat/partials/stories/stories_list.dart';
 import 'package:minestrix_chat/partials/sync/sync_status_card.dart';
 import 'package:minestrix_chat/utils/matrix_widget.dart';
 
@@ -177,18 +176,6 @@ class FeedPageState extends State<FeedPage> {
                       ],
                     ),
                     rightBar: const RightBar(),
-                    headerChildBuilder: ({required bool displaySideBar}) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 8),
-                            child: StoriesList(client: client),
-                          ),
-                        ],
-                      );
-                    },
                     customHeaderText: "Feed",
                     customHeaderActionsButtons: [
                       IconButton(
@@ -227,6 +214,8 @@ class FeedPageState extends State<FeedPage> {
                                 children: [
                                   ListView(
                                     shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     children: [
                                       const H1Title("Welcome in MinesTRIX"),
                                       client.prevBatch == null
@@ -301,6 +290,7 @@ class FeedPageState extends State<FeedPage> {
                             : CustomListViewWithEmoji(
                                 itemCount: events!.length,
                                 controller: controller,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (BuildContext c, int i,
                                     void Function(Offset, Event) onReact) {
                                   return Padding(

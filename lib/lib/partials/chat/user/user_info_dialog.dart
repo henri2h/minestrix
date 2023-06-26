@@ -72,7 +72,7 @@ class UserInfoDialog extends StatelessWidget {
           ListTile(
               title: const Text("Matrix Id"),
               subtitle:
-                  Text(user.id, style: Theme.of(context).textTheme.caption)),
+                  Text(user.id, style: Theme.of(context).textTheme.bodySmall)),
         ListTile(
             title: Text("Role in ${user.room.displayname}"),
             subtitle: Text(user.powerLevelText)),
@@ -92,8 +92,9 @@ class UserInfoDialog extends StatelessWidget {
                       return RoomListItem(
                           key: Key("room_${room.id}"),
                           room: room,
-                          selected: room == user.room,
+                          open: room == user.room,
                           client: room.client,
+                          onLongPress: () {},
                           onSelection: (_) {});
                     }),
                 ],

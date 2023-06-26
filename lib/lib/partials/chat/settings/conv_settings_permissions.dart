@@ -104,16 +104,16 @@ class _ConvSettingsPermissionsState extends State<ConvSettingsPermissions> {
           permissions = room.getState(EventTypes.RoomPowerLevels, "")?.content;
 
           if (permissions == null) {
-            return Column(
-              children: const [
+            return const Column(
+              children: [
                 ConvSettingsBackButton(),
                 Text("No premissions found")
               ],
             );
           }
           return Column(children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 ConvSettingsBackButton(),
                 Text("Roles & permissions",
                     style:
@@ -254,7 +254,9 @@ class PermissionTile extends StatelessWidget {
     if (permissions != null &&
         (!isEvent || permissions["events"] is Map<String, dynamic>)) {
       if (isEvent) {
-        permissions["events"][eventType] = value;
+        final permissionsEventsMap =
+            permissions["events"] as Map<String, dynamic>;
+        permissionsEventsMap[eventType] = value;
       } else {
         permissions[eventType] = value;
       }
